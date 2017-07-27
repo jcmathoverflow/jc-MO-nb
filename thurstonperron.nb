@@ -1,0 +1,368 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     14046,        359]
+NotebookOptionsPosition[     13715,        342]
+NotebookOutlinePosition[     14070,        358]
+CellTagsIndexPosition[     14027,        355]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"rootvals", "=", 
+     RowBox[{"Flatten", "[", 
+      RowBox[{
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"pts", "[", 
+             RowBox[{"[", 
+              RowBox[{"j", ",", "2"}], "]"}], "]"}], "<", "0"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"pts", "[", 
+             RowBox[{"[", 
+              RowBox[{"j", ",", "1"}], "]"}], "]"}], "}"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"pts", "[", 
+               RowBox[{"[", 
+                RowBox[{"j", ",", "1"}], "]"}], "]"}], "+", 
+              RowBox[{"I", " ", 
+               RowBox[{"pts", "[", 
+                RowBox[{"[", 
+                 RowBox[{"j", ",", "2"}], "]"}], "]"}]}]}], ",", 
+             RowBox[{
+              RowBox[{"pts", "[", 
+               RowBox[{"[", 
+                RowBox[{"j", ",", "1"}], "]"}], "]"}], "-", 
+              RowBox[{"I", " ", 
+               RowBox[{"pts", "[", 
+                RowBox[{"[", 
+                 RowBox[{"j", ",", "2"}], "]"}], "]"}]}]}]}], "}"}]}], "]"}], 
+         "\[IndentingNewLine]", ",", 
+         RowBox[{"{", 
+          RowBox[{"j", ",", 
+           RowBox[{"Length", "[", "pts", "]"}]}], "}"}]}], "]"}], ",", "1"}], 
+      "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"coeff", "=", 
+     RowBox[{"CoefficientList", "[", 
+      RowBox[{
+       RowBox[{"Product", "[", 
+        RowBox[{
+         RowBox[{"x", "-", 
+          RowBox[{"rootvals", "[", 
+           RowBox[{"[", "j", "]"}], "]"}]}], ",", 
+         RowBox[{"{", 
+          RowBox[{"j", ",", 
+           RowBox[{"Length", "[", "rootvals", "]"}]}], "}"}]}], "]"}], ",", 
+       "x"}], "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"coeff2", "=", 
+     RowBox[{"Round", "[", "coeff", "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"poly", "=", 
+     RowBox[{"FromDigits", "[", 
+      RowBox[{
+       RowBox[{"Reverse", "[", "coeff2", "]"}], ",", "x"}], "]"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"rootvals2", "=", 
+     RowBox[{"x", "/.", 
+      RowBox[{"NSolve", "[", 
+       RowBox[{
+        RowBox[{"poly", "\[Equal]", "0"}], ",", "x"}], "]"}]}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"maxpos", "=", 
+     RowBox[{"Max", "[", 
+      RowBox[{"Select", "[", 
+       RowBox[{"rootvals2", ",", 
+        RowBox[{
+         RowBox[{"Element", "[", 
+          RowBox[{"#", ",", "Reals"}], "]"}], "&"}]}], "]"}], "]"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"maxnonpos", "=", 
+     RowBox[{"Max", "[", 
+      RowBox[{"-", 
+       RowBox[{"Select", "[", 
+        RowBox[{"rootvals2", ",", 
+         RowBox[{
+          RowBox[{"Element", "[", 
+           RowBox[{"#", ",", "Reals"}], "]"}], "&"}]}], "]"}]}], "]"}]}], ";",
+     "\[IndentingNewLine]", 
+    RowBox[{"Column", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Expand", "[", "poly", "]"}], ",", 
+       RowBox[{"Text", "[", 
+        RowBox[{"\"\<Largest positive real root = \>\"", "<>", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"maxpos", ">", "0"}], ",", 
+           RowBox[{"ToString", "[", "maxpos", "]"}], ",", "\"\<{}\>\""}], 
+          "]"}]}], "]"}], ",", 
+       RowBox[{"Text", "[", 
+        RowBox[{"\"\<|Largest non-positive real root| = \>\"", "<>", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"maxnonpos", ">", "0"}], ",", 
+           RowBox[{"ToString", "[", "maxnonpos", "]"}], ",", "\"\<{}\>\""}], 
+          "]"}]}], "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"Show", "[", 
+        RowBox[{
+         RowBox[{"DensityPlot", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"Log", "[", 
+            RowBox[{"1", "+", 
+             RowBox[{"Abs", "[", 
+              RowBox[{"FromDigits", "[", 
+               RowBox[{
+                RowBox[{"Reverse", "[", "coeff2", "]"}], ",", 
+                RowBox[{"w", "+", 
+                 RowBox[{"I", " ", "z"}]}]}], "]"}], "]"}]}], "]"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"w", ",", 
+             RowBox[{
+              RowBox[{"-", "c"}], "-", ".1"}], ",", 
+             RowBox[{"c", "+", ".1"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"z", ",", 
+             RowBox[{
+              RowBox[{"-", "c"}], "-", ".1"}], ",", 
+             RowBox[{"c", "+", ".1"}]}], "}"}], ",", 
+           RowBox[{"ColorFunction", "\[Rule]", "GrayLevel"}]}], "]"}], ",", 
+         RowBox[{"Graphics", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"Black", ",", 
+             RowBox[{"Point", "[", 
+              RowBox[{"Table", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"Re", "[", 
+                   RowBox[{"rootvals", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "]"}], ",", 
+                  RowBox[{"Im", "[", 
+                   RowBox[{"rootvals", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "]"}]}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"j", ",", 
+                  RowBox[{"Length", "[", "rootvals", "]"}]}], "}"}]}], "]"}], 
+              "]"}], ",", "Red", ",", 
+             RowBox[{"Point", "[", 
+              RowBox[{"Table", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"Re", "[", 
+                   RowBox[{"rootvals2", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "]"}], ",", 
+                  RowBox[{"Im", "[", 
+                   RowBox[{"rootvals2", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], "]"}]}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"j", ",", 
+                  RowBox[{"Length", "[", "rootvals2", "]"}]}], "}"}]}], "]"}],
+               "]"}], ",", "Black", ",", 
+             RowBox[{"Circle", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"0", ",", "0"}], "}"}], ",", "c"}], "]"}]}], "}"}], 
+           ",", 
+           RowBox[{"PlotRange", "\[Rule]", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"-", "c"}], "-", ".1"}], ",", 
+                RowBox[{"c", "+", ".1"}]}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"-", "c"}], "-", ".1"}], ",", 
+                RowBox[{"c", "+", ".1"}]}], "}"}]}], "}"}]}]}], "]"}], ",", 
+         RowBox[{"ImageSize", "\[Rule]", "300"}]}], "]"}]}], "}"}], "]"}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"c", ",", "5"}], "}"}], ",", "1", ",", "10"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"pts", ",", 
+       RowBox[{"{", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "0"}], "}"}], "}"}]}], "}"}], ",", "Locator", ",", 
+     
+     RowBox[{"LocatorAutoCreate", "\[Rule]", "True"}]}], "}"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->CompressedData["
+1:eJxTTMoPSmViYGAQB2IQzdX87EjHyVeOfNMh9BPjFMtOIF0gkmIFojsq9tqB
+6Cu/pJ1A9EyLf64g+sXCVg8QHdbwqR5EM/BPmgCiZd5VzwHrk5+4HESbq2Ws
+BdET1q7aApY3SHgOolUVmj+A6IiVH3+C6F0yoexdQFo7zpYXRH+JceUD0flr
+xOVBtNXnKhUQPYn/jCaITtu4WwtEX1k3UQ9EP5j0Fkwb8S8yA9E/HhtZguiA
+WduiQXRb6qUcEH1ILLYERJd1LS0H0Vt6pjeDaA75p20geobDz26weQeSekG0
+wl/lFd1XXjl+O9axCURPMSreBaIdwxh3g+g9HF4HQDSH4b8jIJrx3NrTIHqu
+XPI5EK13ueASWN8kw2sgGgBRS85I
+  "]],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`c$$ = 5, $CellContext`pts$$ = {{
+    2.369999999999999, 2.66}, {
+    3.629999999999999, -1.38}, {-3.5600000000000005`, -2.1999999999999997`}, \
+{-2.0300000000000002`, 2.88}}, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`c$$], 5}, 1, 10}, {{
+       Hold[$CellContext`pts$$], {{0, 0}}}, Automatic}}, Typeset`size$$ = {
+    300., {173.84375, 179.15625}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`c$101845$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`c$$ = 5, $CellContext`pts$$ = {{0, 0}}}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`c$$, $CellContext`c$101845$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> ($CellContext`rootvals = Flatten[
+          Table[
+           If[Part[$CellContext`pts$$, $CellContext`j, 2] < 0, {
+             Part[$CellContext`pts$$, $CellContext`j, 1]}, {
+            Part[$CellContext`pts$$, $CellContext`j, 1] + 
+             I Part[$CellContext`pts$$, $CellContext`j, 2], 
+             Part[$CellContext`pts$$, $CellContext`j, 1] - I 
+             Part[$CellContext`pts$$, $CellContext`j, 2]}], {$CellContext`j, 
+            Length[$CellContext`pts$$]}], 1]; $CellContext`coeff = 
+        CoefficientList[
+          
+          Product[$CellContext`x - 
+           Part[$CellContext`rootvals, $CellContext`j], {$CellContext`j, 
+            
+            Length[$CellContext`rootvals]}], $CellContext`x]; \
+$CellContext`coeff2 = Round[$CellContext`coeff]; $CellContext`poly = 
+        FromDigits[
+          
+          Reverse[$CellContext`coeff2], $CellContext`x]; \
+$CellContext`rootvals2 = ReplaceAll[$CellContext`x, 
+          
+          NSolve[$CellContext`poly == 
+           0, $CellContext`x]]; $CellContext`maxpos = Max[
+          
+          Select[$CellContext`rootvals2, 
+           Element[#, Reals]& ]]; $CellContext`maxnonpos = 
+        Max[-Select[$CellContext`rootvals2, Element[#, Reals]& ]]; Column[{
+          Expand[$CellContext`poly], 
+          Text[
+           StringJoin["Largest positive real root = ", 
+            If[$CellContext`maxpos > 0, 
+             ToString[$CellContext`maxpos], "{}"]]], 
+          Text[
+           StringJoin["|Largest non-positive real root| = ", 
+            If[$CellContext`maxnonpos > 0, 
+             ToString[$CellContext`maxnonpos], "{}"]]], 
+          Show[
+           DensityPlot[
+            Log[1 + Abs[
+               FromDigits[
+                Reverse[$CellContext`coeff2], $CellContext`w + 
+                I $CellContext`z]]], {$CellContext`w, -$CellContext`c$$ - 
+             0.1, $CellContext`c$$ + 0.1}, {$CellContext`z, -$CellContext`c$$ - 
+             0.1, $CellContext`c$$ + 0.1}, ColorFunction -> GrayLevel], 
+           Graphics[{Black, 
+             Point[
+              Table[{
+                Re[
+                 Part[$CellContext`rootvals, $CellContext`j]], 
+                Im[
+                 
+                 Part[$CellContext`rootvals, $CellContext`j]]}, \
+{$CellContext`j, 
+                Length[$CellContext`rootvals]}]], Red, 
+             Point[
+              Table[{
+                Re[
+                 Part[$CellContext`rootvals2, $CellContext`j]], 
+                Im[
+                 
+                 Part[$CellContext`rootvals2, $CellContext`j]]}, \
+{$CellContext`j, 
+                Length[$CellContext`rootvals2]}]], Black, 
+             Circle[{0, 0}, $CellContext`c$$]}, 
+            PlotRange -> {{-$CellContext`c$$ - 0.1, $CellContext`c$$ + 
+               0.1}, {-$CellContext`c$$ - 0.1, $CellContext`c$$ + 0.1}}], 
+           ImageSize -> 300]}]), 
+      "Specifications" :> {{{$CellContext`c$$, 5}, 1, 
+         10}, {{$CellContext`pts$$, {{0, 0}}}, Automatic, ControlType -> 
+         Locator, LocatorAutoCreate -> True}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{349., {220., 226.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{{3.595324423653892*^9, 3.595324448334841*^9}, 
+   3.5953246417842703`*^9, 3.59532473327195*^9, 3.5953247822348824`*^9, {
+   3.5953254884852037`*^9, 3.5953255004724903`*^9}, 3.5953255550270767`*^9, {
+   3.5953257083510017`*^9, 3.5953257322970448`*^9}, 3.5953257822962637`*^9, 
+   3.5953258159316587`*^9, {3.595325878475807*^9, 3.5953258981503677`*^9}, {
+   3.595326184504746*^9, 3.5953261876458263`*^9}, 3.595326273201885*^9, 
+   3.595326311205391*^9, {3.595326375289366*^9, 3.5953263978901787`*^9}, {
+   3.595326496081812*^9, 3.595326519817758*^9}, {3.595326566943103*^9, 
+   3.595326571614875*^9}, 3.6010960968636427`*^9, 3.601096153166955*^9, 
+   3.601096233442926*^9, 3.601096307780842*^9, 3.601096369987917*^9}]
+}, Open  ]]
+},
+WindowSize->{740, 816},
+WindowMargins->{{41, Automatic}, {27, Automatic}},
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 7684, 202, 388, "Input"],
+Cell[8266, 226, 5433, 113, 463, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
