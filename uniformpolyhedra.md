@@ -96,15 +96,19 @@ U_{58} Small Stellated Truncated Dodecahedron: 2 5 | 5/3, https://bendwavy.org/k
 
 -----
 
-(13, 14)
-
-U_{33} Small Dodecicosidodecahedron: 3/2 5 | 5, https://bendwavy.org/klitzing/incmats/saddid.htm
-
-U_{61} Great Dodecicosidodecahedron: 5/2 3 | 5/3, https://bendwavy.org/klitzing/incmats/gaddid.htm
+(13)
 
 U_{43} Small Ditrigonal Dodecicosidodecahedron: 3 5/3 | 5, https://bendwavy.org/klitzing/incmats/sidditdid.htm
 
 U_{42} Great Ditrigonal Dodecicosidodecahedron: 3 5 | 5/3, https://bendwavy.org/klitzing/incmats/gidditdid.htm
+
+-----
+
+(14)
+
+U_{33} Small Dodecicosidodecahedron: 3/2 5 | 5, https://bendwavy.org/klitzing/incmats/saddid.htm
+
+U_{61} Great Dodecicosidodecahedron: 5/2 3 | 5/3, https://bendwavy.org/klitzing/incmats/gaddid.htm
 
 -----
 
